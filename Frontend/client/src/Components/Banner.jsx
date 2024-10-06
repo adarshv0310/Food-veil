@@ -30,7 +30,7 @@ function Banner() {
         . Our mission is to satisfying your carving and elevate<br/> your dining experiences , One delicious meal at a time
         </p>
 
-        <button className='ml-10 bg-white border rounded-3xl text-black p-2  md:px-5 px-2 text-center'>View menu</button>
+        <button className='ml-10 bg-white border rounded-3xl text-black p-2  md:px-5 px-2 text-center hover:bg-slate-400'>View menu</button>
       </div>
     </div>
   );
