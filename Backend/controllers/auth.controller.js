@@ -6,9 +6,9 @@ import { errorhandler } from "../utils/error.js";
 
 
 export const Signup = async(req, res, next) => {
-
+    const { email, password, name, role } = req.body;
     try {
-        const { email, password, name, role } = req.body;
+
 
         // to check if usermail alrady exist
         const existinguser = User.findOne({ email });
