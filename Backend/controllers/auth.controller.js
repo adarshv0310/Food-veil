@@ -56,12 +56,22 @@ export const Signin = async(req, res, next, err) => {
             return (errorhandler(400, 'Invalid credentials'));
         }
 
+        /* 
         let token;
         try {
             token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
         } catch (error) {
             return (errorhandler(500, `Token generation error: ${error}`));
-        }
+        }*/
+
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Optional expiration time
+        const { password: pass, ...rest } = user._doc;
+
+        //  cookie and respond
+        res
+            .cookie('access_token', token, { httpOnly: true })
+            .status(200)
+            .json(rest);
 
 
     } catch (error) {
