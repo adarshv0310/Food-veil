@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['customer', 'delivery_person', 'admin', 'resturant_owner'],
         default: 'customer',
+        required: true,
     },
 }, { timestamps: true });
 

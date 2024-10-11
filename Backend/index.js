@@ -24,7 +24,11 @@ const URI = `mongodb+srv://adarshsingh2003v:${encodedPassword}@food.mqsmc.mongod
 // mongodb connection 
 
 
-mongoose.connect(URI)
+mongoose.connect(URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 20000,
+    })
     .then(() => console.log("Mongodb Connected"))
     .catch((err) => console.log("Mongodb error : ", err));
 
