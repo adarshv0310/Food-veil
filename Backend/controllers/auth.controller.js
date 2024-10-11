@@ -38,4 +38,4 @@ export const Signup = async(req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
