@@ -51,7 +51,7 @@ export const Signin = async(req, res, next, err) => {
         }
 
         // to verify password
-        const isMatch = bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return (errorhandler(400, 'Invalid credentials'));
         }
