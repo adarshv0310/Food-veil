@@ -13,7 +13,7 @@ export const Signup = async(req, res, next) => {
         // to check if usermail alrady exist
         const existinguser = await User.findOne({ email });
         if (existinguser) {
-            return (errorhandler(409, 'User already exist with this email'));
+            return next(errorhandler(409, 'User already exist with this email'));
         }
 
 
@@ -47,13 +47,13 @@ export const Signin = async(req, res, next, err) => {
         // to check if user is already in database
         const user = await User.findOne({ email });
         if (!user) {
-            return (errorhandler(404, 'User not found'));
+            return next(errorhandler(404, 'User not found'));
         }
 
         // to verify password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return (errorhandler(400, 'Invalid credentials'));
+            return next(errorhandler(400, 'Invalid credentials'));
         }
 
         /* 
