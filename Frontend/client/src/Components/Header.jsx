@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { FaBasketShopping } from 'react-icons/fa6';
 import { MdMenu } from "react-icons/md";
+import { Link } from 'react-router-dom';
+
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,10 +15,12 @@ function Header() {
   return (
     <header className='container shadow-md bg-white max-w-full'>
       <div className='mx-auto p-3 flex justify-between items-center max-w-6xl'>
-        <h1 className='text-3xl font-bold text-orange-500'>Tomato.</h1>
+        <h1 className='text-3xl font-bold text-orange-500'>Tumtum.</h1>
         <div className='hidden sm:flex gap-4'>
           <ul className='flex gap-4'>
-            <li className='text-slate-700 hover:underline'>Home</li>
+          <Link to='/'>
+           <li className='text-slate-700 hover:underline'>Home</li>
+           </Link>
             <li className='text-slate-700 hover:underline'>Menu</li>
             <li className='text-slate-700 hover:underline'>Contact us</li>
           </ul>
@@ -34,7 +38,9 @@ function Header() {
         <button className='ml-4'>
           <FaBasketShopping className='text-slate-950 font-semibold text-3xl' />
         </button>
-        <span className='gap-2 ml-2 sm:ml-5 text-xl hidden sm:inline'>Sign in</span>
+       <Link to='signin'>
+       <span className='gap-2 ml-2 sm:ml-5 text-xl hidden sm:inline'>Sign in</span>
+       </Link>
         <button onClick={toggleMobileMenu} className='sm:hidden text-slate-700'>
         <MdMenu  className='text-3xl font-bold text-slate-950'/>
         </button>
@@ -43,10 +49,14 @@ function Header() {
       {isMobileMenuOpen && (
         <div className='sm:hidden flex flex-col items-start p-2 left-0'>
           <ul className='flex flex-col gap-2'>
-            <li className='text-slate-700 hover:underline'>Home</li>
+           <Link to='/'>
+           <li className='text-slate-700 hover:underline'>Home</li>
+           </Link>
             <li className='text-slate-700 hover:underline'>Menu</li>
             <li className='text-slate-700 hover:underline'>Contact us</li>
-            <li className='text-slate-700 hover:underline'>Sign in</li>
+           <Link to='signin'>
+           <li className='text-slate-700 hover:underline'>Sign in</li>
+           </Link>
           </ul>
         </div>
       )}
