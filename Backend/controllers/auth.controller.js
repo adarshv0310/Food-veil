@@ -78,3 +78,16 @@ export const Signin = async(req, res, next, err) => {
         next(error);
     }
 };
+
+
+
+export const signout = async(req, res, error, next) => {
+    // clearing the token
+    try {
+        res.clearCookie('access_token');
+        res.status(200).send('Logged out successfully');
+    } catch (error) {
+        next(error);
+    }
+
+};
