@@ -36,46 +36,48 @@ export const Signup = async(req, res, next) => {
 
         })
     } catch (error) {
-        next(error);
+        console.error('Signin error:', err);
+        return next(errorhandler(500, 'Internal Server Error'));
     }
 };
 
 
-export const Signin = async(req, res, next, err) => {
+
+
+export const Signin = async(req, res, next) => {
     const { email, password } = req.body;
+
     try {
-        // to check if user is already in database
-        const user = await User.findOne({ email });
+        // Checking if user exists
+        const user = await User.findOne({ email }); // Added await
         if (!user) {
-            return next(errorhandler(404, 'User not found'));
+            return next(errorhandler(401, 'Invalid email or password'));
         }
 
-        // to verify password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return next(errorhandler(400, 'Invalid credentials'));
+        // Password check (using async version)
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return next(errorhandler(401, 'Invalid email or password'));
         }
 
-        /* 
+        // Generate JWT token
+
         let token;
         try {
             token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
         } catch (error) {
-            return (errorhandler(500, `Token generation error: ${error}`));
-        }*/
+            return next(errorhandler(500, `Token generation error: ${error.message}`)); // Pass the error correctly
+        }
 
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Optional expiration time
-        const { password: pass, ...rest } = user._doc;
-
-        //  cookie and respond
+        // Set cookie and respond
         res
             .cookie('access_token', token, { httpOnly: true })
             .status(200)
             .json(rest);
 
-
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        console.error('Signin error:', err);
+        return next(errorhandler(500, 'Internal Server Error'));
     }
 };
 

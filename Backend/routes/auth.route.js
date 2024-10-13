@@ -6,9 +6,14 @@ const router = express.Router();
 
 
 
-
-router.post('/signup', Signup);
 router.post('/signin', Signin);
+router.post('/signup', Signup);
+
+/*router.post('/signin', (req, res, next) => {
+    console.log("Received POST /signin"); // Debug log
+    next();
+}, Signin);*/
+
 
 
 export default router;
