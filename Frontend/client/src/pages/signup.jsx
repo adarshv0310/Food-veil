@@ -14,8 +14,10 @@ const handlesubmit =  async(e)=>{
         headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(formdata),
       });
+
+      co
     }
     catch(error){
 
