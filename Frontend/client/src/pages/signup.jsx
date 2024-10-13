@@ -8,7 +8,14 @@ const [error ,setError] = useState(null);
 const handlesubmit =  async(e)=>{
     e.preventDefault();
     try{
-
+      setLoading(true);
+      const res= await fetch('http://localhost:8000/auth/signup',{
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+      });
     }
     catch(error){
 
@@ -20,7 +27,7 @@ const handlesubmit =  async(e)=>{
     [e.target.id]:e.target.value,
   });
  }
- 
+
   return (
     <div className=''>
     <div className='p-3 max-w-lg mx-auto mt-20'>
