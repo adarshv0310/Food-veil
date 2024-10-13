@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Signup() {
+    const navigate = useNavigate();
 const [formdata , setFormdata] = useState({});
 const [loading , setLoading] = useState(false);
 const [error ,setError] = useState(null);
@@ -17,10 +18,20 @@ const handlesubmit =  async(e)=>{
           body: JSON.stringify(formdata),
       });
 
-      co
+       const data = await res.json();
+       if(data.success === false){
+        setLoading(false);
+        setError(data.message);
+       }
+       setLoading(false);
+       setError(null);
+       setTimeout(()=>{
+         navigate('/signin');
+       } , 2000);
     }
     catch(error){
-
+        setLoading(false);
+      setError(error.message);
     }
 }
  const handlechange = (e) =>{
@@ -59,14 +70,15 @@ const handlesubmit =  async(e)=>{
      onChange={handlechange}
     
    />
-   <button className='bg-orange-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>Sign up</button>
+   <button className='bg-orange-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>{loading  ? 'Loading ...' : 'Signup'}</button>
     </form>
     <div className='flex gap-2 mt-5'>
-   <p> Already have account</p>
+   <p> Already have account ?</p>
    <Link to={'/signin'}>
-     <span className='text-blue-700'>Sign in</span>
+     <span className='text-blue-700'>Signin</span>
    </Link>
  </div>
+ {error && <p className='text-red-500 mt-5'>{error}</p>}
 </div>
   </div>
   );
