@@ -10,7 +10,7 @@ const initialstate = {
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState,
+    initialstate,
     reducers: {
         signinstart: (state) => {
             state.loading = true;

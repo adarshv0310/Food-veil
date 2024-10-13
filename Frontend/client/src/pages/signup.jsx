@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signinstart,signinfailure,signinsuccess } from '../redux/User/authSlice';
+
 function Signup() {
-    const navigate = useNavigate();
+const navigate = useNavigate();
+const [sucessmeessage , setSucessmessage] = useState(null);
 const [formdata , setFormdata] = useState({});
 const [loading , setLoading] = useState(false);
 const [error ,setError] = useState(null);
@@ -9,7 +13,7 @@ const [error ,setError] = useState(null);
 const handlesubmit =  async(e)=>{
     e.preventDefault();
     try{
-      setLoading(true);
+     setLoading(true);
       const res= await fetch('http://localhost:8000/auth/signup',{
         method:'POST',
         headers: {
@@ -22,9 +26,12 @@ const handlesubmit =  async(e)=>{
        if(data.success === false){
         setLoading(false);
         setError(data.message);
+        return;
        }
        setLoading(false);
        setError(null);
+       setSucessmessage('Signup successful! Redirecting to sign in...');
+
        setTimeout(()=>{
          navigate('/signin');
        } , 2000);
@@ -32,14 +39,28 @@ const handlesubmit =  async(e)=>{
     catch(error){
         setLoading(false);
       setError(error.message);
-    }
-}
+    }}
+
+
  const handlechange = (e) =>{
   setFormdata({
     ...formdata,
     [e.target.id]:e.target.value,
   });
+
+  
  }
+
+
+ useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 3000); // Error will clear after 3 seconds
+
+      return () => clearTimeout(timer); // Cleanup the timer on unmount or when error changes
+    }
+  }, [error]);
 
   return (
     <div className=''>
@@ -79,6 +100,7 @@ const handlesubmit =  async(e)=>{
    </Link>
  </div>
  {error && <p className='text-red-500 mt-5'>{error}</p>}
+ {sucessmeessage && <p className='text-green-500 mt-5'>{sucessmeessage}</p>}
 </div>
   </div>
   );
