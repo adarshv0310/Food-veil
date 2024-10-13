@@ -49,27 +49,27 @@ export const Signin = async(req, res, next) => {
 
     try {
         // Checking if user exists
-        const user = await User.findOne({ email }); // Added await
+        const user = await User.findOne({ email });
         if (!user) {
             return next(errorhandler(401, 'Invalid email or password'));
         }
 
-        // Password check (using async version)
+        // Password checking using async version
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             return next(errorhandler(401, 'Invalid email or password'));
         }
 
-        // Generate JWT token
+        // Generating JWT token for secure authentication
 
         let token;
         try {
             token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
         } catch (error) {
-            return next(errorhandler(500, `Token generation error: ${error.message}`)); // Pass the error correctly
+            return next(errorhandler(500, `Token generation error: ${error.message}`)); // Passing the error 
         }
 
-        // Set cookie and respond
+        // Setting cookie and responding 
         res
             .cookie('access_token', token, { httpOnly: true })
             .status(200)
