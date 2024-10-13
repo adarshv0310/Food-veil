@@ -9,7 +9,7 @@ function signin() {
             <input
             type='email'
             placeholder='abc@gmail.com'
-            id='eamil'
+            id='email'
             className='border p-3 rounded-lg border-black'
             />
         <input

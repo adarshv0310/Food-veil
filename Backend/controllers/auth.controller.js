@@ -7,6 +7,10 @@ import jwt from 'jsonwebtoken';
 
 export const Signup = async(req, res, next) => {
     const { email, password, name, role } = req.body;
+    //console.log(req.body);
+    /*if (!name || !email || !password || role) {
+        return next(errorhandler(400, 'Name, email, and password are required'));
+    } */
     try {
 
 
@@ -36,7 +40,7 @@ export const Signup = async(req, res, next) => {
 
         })
     } catch (error) {
-        console.error('Signin error:', err);
+        console.error('Signin error:', error);
         return next(errorhandler(500, 'Internal Server Error'));
     }
 };
