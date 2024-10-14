@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { signinsuccess,setError,setLoading } from '../redux/User/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 export default function Signin() {
-    const [loading , setLoading]=useState(false);
-    const [error ,setError] = useState(null);
+  const {loading , error ,currentUser} = useSelector((state)=>state.auth);
+    /*const [loading , setLoading]=useState(false);
+    const [error ,setError] = useState(null);*/
     const [successmessage ,setSuccessmessage]=useState(null);
     const [formdata , setFormdata]= useState({});
     const navigate=useNavigate();
+    const dispatch=useDispatch();
 
     const handlechange = (e)=>{
         setFormdata({
@@ -36,7 +40,9 @@ export default function Signin() {
         }
         setLoading(false);
         setError(null);
+        dispatch(signinsuccess(data));
         setSuccessmessage('Signin successful! Redirecting to home...');
+        
 
         setTimeout(() => {
             navigate('/');
@@ -81,7 +87,9 @@ export default function Signin() {
           onChange={handlechange}
          
         />
-        <button className='bg-orange-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
+        <button className='bg-orange-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+        disabled={loading}>
+        
         {loading ? 'Loading...' : 'Sign In'}
         </button>
          </form>
