@@ -54,9 +54,12 @@ function Header() {
            </Link>
             <li className='text-slate-700 hover:underline'>Menu</li>
             <li className='text-slate-700 hover:underline'>Contact us</li>
-           <Link to='signin'>
+           <Link to='/signin'>
            <li className='text-slate-700 hover:underline'>Sign in</li>
-           </Link>
+          </Link>
+           <Link to='/profile'>
+           <li className='text-slate-700 hover:underline'>Profile</li>
+          </Link>
           </ul>
         </div>
       )}
