@@ -81,6 +81,17 @@ export default function SignUp() {
           id='password'
           onChange={handleChange}
         />
+        <select 
+        className='border p-3 rounded-lg'
+        id='role'
+        onChange={handleChange}
+        >
+         
+          <option value="customer">Customer</option>
+          <option value="admin">Admin</option>
+          <option value="restaurant_owner">Restaurant Owner</option>
+          <option value="delivery_person">Delivery person</option>
+        </select>
 
         <button
           disabled={loading}
