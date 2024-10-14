@@ -46,7 +46,7 @@ app.use(cookieParser());
 
 // route connection
 
-app.use('/ddauth', authrouter);
+app.use('/auth', authrouter);
 
 
 
