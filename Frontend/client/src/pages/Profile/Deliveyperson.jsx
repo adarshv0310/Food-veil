@@ -1,12 +1,11 @@
 import React from 'react'
 
-function Profile() {
+function Deliveyperson() {
   return (
     <div>
-        
       
     </div>
   )
 }
 
-export default Profile
+export default Deliveyperson

@@ -1,12 +1,11 @@
 import React from 'react'
 
-function Profile() {
+function ResturantProfile() {
   return (
     <div>
-        
       
     </div>
   )
 }
 
-export default Profile
+export default ResturantProfile
