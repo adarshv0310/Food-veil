@@ -8,9 +8,15 @@ import jwt from 'jsonwebtoken';
 export const Signup = async(req, res, next) => {
     const { email, password, name, role } = req.body;
     //console.log(req.body);
-    if (!name || !email || !password || role) {
-        return next(errorhandler(400, 'All fields are required'));
+
+
+    if (role === 'admin') {
+        const existingadmin = await User.findOne({ role: 'admin' });
+        if (existingadmin) {
+            return next(errorhandler(400, 'Admin already exist'));
+        }
     }
+
     try {
 
 
