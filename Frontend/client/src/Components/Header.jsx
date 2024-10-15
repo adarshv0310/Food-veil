@@ -17,13 +17,13 @@ function Header() {
 
   const handleDashboardNavigation = () => {
     if (currentUser?.role === 'admin') {
-        navigate('/admin-p');
+        navigate('/adminp');
     } else if (currentUser?.role === 'customer') {
-        navigate('/customer-p');
+        navigate('/customerp');
     } else if (currentUser?.role === 'restaurant_owner') {
-        navigate('/restaurant-p');
+        navigate('/restaurantp');
     } else if (currentUser?.role === 'delivery_person') {
-        navigate('/delivery-p');
+        navigate('/deliveryp');
     } else {
         navigate('/'); // Fallback if role is not recognized
     }

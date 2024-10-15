@@ -18,10 +18,10 @@ function App() {
       <Route path='/signin' element={<Signin/>} />
       <Route path='/signup' element={<Signup/>} />
       <Route element={<PrivateRoute/>}>
-      <Route path='admin-p' element={<Adminprofile/>}/>;
-      <Route path='resturant-p' element={<ResturantProfile/>}/>;
-      <Route path='delivery-p' element={<Deliveyperson/>}/>;
-      <Route path='customer-p' element={<Customerprofile/>}/>;
+      <Route path='/adminp' element={<Adminprofile/>}/>;
+      <Route path='/resturantp' element={<ResturantProfile/>}/>;
+      <Route path='/deliveryp' element={<Deliveyperson/>}/>;
+      <Route path='/customerp' element={<Customerprofile/>}/>;
       </Route>
      </Routes>
      </BrowserRouter>
