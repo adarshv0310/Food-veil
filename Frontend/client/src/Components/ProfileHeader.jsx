@@ -40,7 +40,7 @@ function ProfileHeader() {
         <div onClick={currentUser ? handleDashboardNavigation : undefined} className="cursor-pointer">
                     {currentUser ? (
                         <img
-                            className='rounded-full h-7 w-7 object-cover'
+                            className='rounded-full h-7 w-7 object-cover hidden sm:block'
                             src={currentUser.avatar}
                             alt='profile'
                         />
