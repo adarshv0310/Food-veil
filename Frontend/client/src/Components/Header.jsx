@@ -4,7 +4,7 @@ import { FaBasketShopping } from 'react-icons/fa6';
 import { MdMenu } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-
+import Customerprofile from '../pages/Profile/Customerprofile';
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,9 +17,9 @@ function Header() {
 
   const handleDashboardNavigation = () => {
     if (currentUser?.role === 'admin') {
-        navigate('/adminp');
+      navigate('/adminp');
     } else if (currentUser?.role === 'customer') {
-        navigate('/customerp');
+      navigate('/customerp');
     } else if (currentUser?.role === 'restaurant_owner') {
         navigate('/restaurantp');
     } else if (currentUser?.role === 'delivery_person') {
