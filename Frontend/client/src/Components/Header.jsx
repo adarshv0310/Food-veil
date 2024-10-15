@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { FaBasketShopping } from 'react-icons/fa6';
 import { MdMenu } from "react-icons/md";
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+   const {currentUser} = useSelector((state)=>state.auth);
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
@@ -38,9 +39,17 @@ function Header() {
         <button className='ml-4'>
           <FaBasketShopping className='text-slate-950 font-semibold text-3xl' />
         </button>
-       <Link to='signin'>
-       <span className='gap-2 ml-2 sm:ml-5 text-xl hidden sm:inline'>Sign in</span>
-       </Link>
+        <Link to='/profile'>
+            {currentUser ? (
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Sign in</li>
+            )}
+          </Link>
         <button onClick={toggleMobileMenu} className='sm:hidden text-slate-700'>
         <MdMenu  className='text-3xl font-bold text-slate-950'/>
         </button>
@@ -54,11 +63,16 @@ function Header() {
            </Link>
             <li className='text-slate-700 hover:underline'>Menu</li>
             <li className='text-slate-700 hover:underline'>Contact us</li>
-           <Link to='/signin'>
-           <li className='text-slate-700 hover:underline'>Sign in</li>
-          </Link>
-           <Link to='/profile'>
-           <li className='text-slate-700 hover:underline'>Profile</li>
+            <Link to='/profile'>
+            {currentUser ? (
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Sign in</li>
+            )}
           </Link>
           </ul>
         </div>
