@@ -11,14 +11,14 @@ function PrivateRoute() {
 
 switch (currentUser.role) {
     case 'admin':
-        return <Navigate to='/admin-p' />;
+        return <Navigate to='/adminp' />;
     case 'customer':
-        return <Navigate to='/customer-p' />;
+        return <Navigate to='/customerp' />;
     case 'resturant_owner':
-        return <Navigate to='/resturant-p' />;
+        return <Navigate to='/resturantp' />;
     
      case 'delivery_person':
-         return <Navigate to='/delivery-p' />;
+         return <Navigate to='/deliveryp' />;
     // Add more roles as needed
     default:
         return <Navigate to='/' />;
