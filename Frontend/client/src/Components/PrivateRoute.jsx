@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {  Navigate } from 'react-router-dom';
 
 function PrivateRoute() {
-   const {currentUser} = useSelector((state)=>state.user)
+   const {currentUser} = useSelector((state)=>state.auth)
    if (!currentUser) {
     return <Navigate to='/signin' />;
 }
@@ -21,7 +21,7 @@ switch (currentUser.role) {
          return <Navigate to='/delivery-p' />;
     // Add more roles as needed
     default:
-        return <Navigate to='/profile' />;
+        return <Navigate to='/' />;
 }
 
 }
