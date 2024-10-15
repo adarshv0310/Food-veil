@@ -4,6 +4,11 @@ import Home from './pages/Home';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
 import Profile from './pages/profile';
+import Adminprofile from './pages/Profile/Adminprofile';
+import PrivateRoute from './Components/PrivateRoute';
+import Customerprofile from './pages/Profile/Customerprofile';
+import Deliveyperson from './pages/Profile/Deliveyperson';
+import ResturantProfile from './pages/Profile/ResturantProfile';
 function App() {
   return (
     <div>
@@ -12,7 +17,12 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/signin' element={<Signin/>} />
       <Route path='/signup' element={<Signup/>} />
-      <Route path='/profile' element={<Profile/>} />
+      <Route element={<PrivateRoute/>}>
+      <Route path='admin-p' element={<Adminprofile/>}/>;
+      <Route path='resturant-p' element={<ResturantProfile/>}/>;
+      <Route path='delivery-p' element={<Deliveyperson/>}/>;
+      <Route path='customer-p' element={<Customerprofile/>}/>;
+      </Route>
      </Routes>
      </BrowserRouter>
     </div>
