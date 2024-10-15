@@ -3,7 +3,7 @@ import { BrowserRouter, Routes , Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
-import Profile from './pages/profile';
+
 import Adminprofile from './pages/Profile/Adminprofile';
 import PrivateRoute from './Components/PrivateRoute';
 import Customerprofile from './pages/Profile/Customerprofile';
