@@ -6,10 +6,15 @@ import bcrypt from 'bcrypt'
 export const updateUser = async(req, res, next) => {
     if (req.user.id !== req.params.id) {
 
-        return next(errorhandler(401, 'Your account not found'));
+        return next(errorhandler(500, 'Your account not found'));
     }
 
     try {
+        console.log('User ID from token:', req.user.id);
+        console.log('User ID from params:', req.params.id);
+        const userInDb = await User.findById(req.user.id);
+        console.log('User in DB:', userInDb);
+
 
         if (req.body.password) {
             req.body.password = await bcrypt.hash(req.body.password, 10);
@@ -29,7 +34,7 @@ export const updateUser = async(req, res, next) => {
 
         res.status(200).json(rest);
     } catch (error) {
-
+        console.error('Error updating user:', error);
         return next(errorhandler(500, 'Internal Server Error'));
 
     }
