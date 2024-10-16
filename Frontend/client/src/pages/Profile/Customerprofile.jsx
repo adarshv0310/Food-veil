@@ -1,16 +1,21 @@
 import React, { useRef, useState }from 'react'
 import ProfileHeader from '../../Components/ProfileHeader'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,} from '../../redux/User/authSlice.js';
 function Customerprofile() {
-  const {currentUser} =useSelector((state)=>state.auth);
+  const {currentUser,loading,error} =useSelector((state)=>state.auth);
   const fileRef =useRef();
+  const dispatch=useDispatch();
   const [formdata , setFormdata] = useState({});
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const handlechange=(e)=>{
     setFormdata(
       {
         ...formdata ,
-      [e.id.value]:e.target.value
+      [e.target.id]:e.target.value
       }
     );
   };
@@ -18,7 +23,33 @@ function Customerprofile() {
 
   const handlesubmit = async(e)=>{
    e.preventDefault();
-  }
+
+   try{
+    dispatch(updateUserStart());
+
+    const res= await fetch(`http://localhost:8000/user/update/${currentUser._id}` ,{
+      method:'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formdata),
+    });
+
+    const data=await res.json();
+
+    if(data.success === false){
+        dispatch(updateUserFailure());
+        return;
+    }
+
+    dispatch(updateUserSuccess(data));
+    setUpdateSuccess(true);
+
+   }
+   catch(error){
+    dispatch(updateUserFailure(error.message));
+   }
+  };
 
   return (
     <div className='container flex flex-col'>
@@ -37,6 +68,7 @@ function Customerprofile() {
     <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
     <form
       className='flex flex-col gap-4'
+      onSubmit={handlesubmit}
       >
        <input 
         type='file'
@@ -81,11 +113,17 @@ function Customerprofile() {
 <button
 className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
 >
-  Update
+{loading ? 'Loading...' : 'Update'}
 </button>
 </form>
     </div>
+    <p className='text-green-700 mt-5'>
+    <p className='text-red-700 mt-5'>{error ? error : ''}</p>
+        {updateSuccess ? 'User is updated successfully!' : ''}
+      </p>
       </div>
+     
+      
     </div>
   )
 }
