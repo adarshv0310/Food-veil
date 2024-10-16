@@ -40,6 +40,7 @@ export default function Signin() {
         }
         setLoading(false);
         setError(null);
+        localStorage.setItem('token', data.token);
         dispatch(signinsuccess(data));
         setSuccessmessage('Signin successful! Redirecting to home...');
         

@@ -6,6 +6,7 @@ import { updateUserStart,
   updateUserFailure,} from '../../redux/User/authSlice.js';
 function Customerprofile() {
   const {currentUser,loading,error} =useSelector((state)=>state.auth);
+  const token=localStorage.getItem('token');
   const fileRef =useRef();
   const dispatch=useDispatch();
   const [formdata , setFormdata] = useState({});
@@ -31,6 +32,7 @@ function Customerprofile() {
       method:'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(formdata),
     });
@@ -70,7 +72,7 @@ function Customerprofile() {
       className='flex flex-col gap-4'
       onSubmit={handlesubmit}
       >
-       <input 
+       {/*<input 
         type='file'
         ref={fileRef}
         accept='image/*'
@@ -82,7 +84,7 @@ function Customerprofile() {
         alt='profile'
         
         className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
-        />
+        />*/}
           <input
           type='text'
        
@@ -116,11 +118,13 @@ className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 dis
 {loading ? 'Loading...' : 'Update'}
 </button>
 </form>
-    </div>
-    <p className='text-green-700 mt-5'>
+   
     <p className='text-red-700 mt-5'>{error ? error : ''}</p>
+    <p className='text-green-700 mt-5'>
         {updateSuccess ? 'User is updated successfully!' : ''}
       </p>
+    </div>
+   
       </div>
      
       
