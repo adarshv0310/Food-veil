@@ -2,8 +2,24 @@ import React, { useRef, useState }from 'react'
 import ProfileHeader from '../../Components/ProfileHeader'
 import { useSelector } from 'react-redux';
 function Customerprofile() {
-  const {currentUser , loading , error} =useSelector((state)=>state.auth);
+  const {currentUser} =useSelector((state)=>state.auth);
   const fileRef =useRef();
+  const [formdata , setFormdata] = useState({});
+
+  const handlechange=(e)=>{
+    setFormdata(
+      {
+        ...formdata ,
+      [e.id.value]:e.target.value
+      }
+    );
+  };
+
+
+  const handlesubmit = async(e)=>{
+   e.preventDefault();
+  }
+
   return (
     <div className='container flex flex-col'>
       <ProfileHeader/>
@@ -40,9 +56,9 @@ function Customerprofile() {
        
           placeholder='name'
           defaultValue={currentUser.name}
-          id='username'
+          id='name'
           className='border p-3 rounded-lg'
-          
+          onChange={handlechange}
         />
         <input
           type='email'
@@ -50,13 +66,13 @@ function Customerprofile() {
           id='email'
           defaultValue={currentUser.email}
           className='border p-3 rounded-lg'
-         
+          onChange={handlechange}
           
         />
         <input
           type='password'
           placeholder='password'
-          
+          onChange={handlechange}
           id='password'
           className='border p-3 rounded-lg'
           

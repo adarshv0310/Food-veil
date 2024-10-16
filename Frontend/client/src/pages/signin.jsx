@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { signinsuccess,setError,setLoading } from '../redux/User/authSlice';
+import { signinsuccess } from '../redux/User/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 export default function Signin() {
-  const {loading , error ,currentUser} = useSelector((state)=>state.auth);
-    /*const [loading , setLoading]=useState(false);
-    const [error ,setError] = useState(null);*/
+  //const {loading , error ,currentUser} = useSelector((state)=>state.auth);
+    const [loading , setLoading]=useState(false);
+    const [error ,setError] = useState(null);
     const [successmessage ,setSuccessmessage]=useState(null);
     const [formdata , setFormdata]= useState({});
     const navigate=useNavigate();
