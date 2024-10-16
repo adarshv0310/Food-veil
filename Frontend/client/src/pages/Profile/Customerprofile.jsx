@@ -3,7 +3,10 @@ import ProfileHeader from '../../Components/ProfileHeader'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserStart,
   updateUserSuccess,
-  updateUserFailure,} from '../../redux/User/authSlice.js';
+  updateUserFailure,
+  deleteUserStart,
+deleteUserFailure,
+deleteUserSuccess} from '../../redux/User/authSlice.js';
 function Customerprofile() {
   const {currentUser,loading,error} =useSelector((state)=>state.auth);
   const token=localStorage.getItem('token');
@@ -53,6 +56,29 @@ function Customerprofile() {
    }
   };
 
+  const handledelete = async()=>{
+    try{
+     dispatch(deleteUserStart);
+     const res  =  await fetch(`http://localhost:8000/user/delete/${currentUser._id}`,{
+      method:'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+     });
+
+     const data = await res.json();
+     if (data.success === false) {
+      dispatch(deleteUserFailure(data.message));
+      return;
+    }
+    dispatch(deleteUserSuccess(data));
+    }
+    catch(error){
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
   return (
     <div className='container flex flex-col'>
       <ProfileHeader/>
@@ -62,7 +88,9 @@ function Customerprofile() {
      <button className='bg-slate-200  m-9 p-4 border rounded-xl font-bold text-lg'>Dashboard</button>
      <button className='bg-slate-200  m-9  mt-1 p-4 border rounded-xl font-bold text-lg'>Signout</button>
      <button className='bg-slate-200  m-9  mt-1 p-4 border rounded-xl font-bold text-lg'>Notification</button>
-     <button className='bg-slate-200  m-9  mt-1 p-4 border rounded-xl font-bold text-lg'>Delete Account</button>
+     <button className='bg-slate-200  m-9  mt-1 p-4 border rounded-xl font-bold text-lg'
+     onClick={handledelete}
+     >Delete Account</button>
     
     </div>
 
