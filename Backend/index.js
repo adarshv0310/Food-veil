@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authrouter from './routes/auth.route.js';
-
+import userrouter from './routes/user.route.js';
 
 dotenv.config();
 const app = express();
@@ -47,6 +47,7 @@ app.use(cookieParser());
 // route connection
 
 app.use('/auth', authrouter);
+app.use('/user', userrouter);
 
 
 

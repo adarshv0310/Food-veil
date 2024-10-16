@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { errorhandler } from '../utils/error';
+import { errorhandler } from '../utils/error.js';
 
 
 export const verifyToken = (req, res, next) => {

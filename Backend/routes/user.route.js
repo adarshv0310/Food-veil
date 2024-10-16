@@ -1,5 +1,5 @@
-import { updateUser } from "../controllers/user.controller";
-import { verifyToken } from "../middlewares/verifyusermiddlewre";
+import { updateUser } from "../controllers/user.controller.js";
+import { verifyToken } from "../middlewares/verifyusermiddlewre.js";
 import express from 'express';
 
 
