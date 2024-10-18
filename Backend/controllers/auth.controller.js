@@ -86,7 +86,7 @@ export const Signin = async(req, res, next) => {
 
         // Setting cookie and responding 
         res
-            .cookie('access_token', token, { httpOnly: true })
+            .cookie('access_token', token, { httpOnly: true, secure: true })
             .status(200)
             .json(rest);
 

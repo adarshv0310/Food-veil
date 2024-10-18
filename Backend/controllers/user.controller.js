@@ -21,7 +21,7 @@ export const updateUser = async(req, res, next) => {
         }
 
 
-        // Update the user in the database
+        // Updating  the user in the database
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id, { $set: req.body }, { new: true, runValidators: true }
         );
