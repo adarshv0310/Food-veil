@@ -7,11 +7,13 @@ import { updateUserStart,
   deleteUserStart,
 deleteUserFailure,
 deleteUserSuccess} from '../../redux/User/authSlice.js';
+import { useNavigate } from 'react-router-dom';
 function Customerprofile() {
   const {currentUser,loading,error} =useSelector((state)=>state.auth);
   const token=localStorage.getItem('token');
   const fileRef =useRef();
   const dispatch=useDispatch();
+  const navigate=useNavigate();
   const [formdata , setFormdata] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -80,7 +82,12 @@ function Customerprofile() {
       return;
     }
     dispatch(deleteUserSuccess(data));
-    }
+    setTimeout(() => {
+      navigate('/signup');
+    }, 2000);
+
+  }
+    
     catch(error){
       dispatch(deleteUserFailure(error.message));
     }

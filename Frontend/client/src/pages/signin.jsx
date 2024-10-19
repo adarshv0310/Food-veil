@@ -14,7 +14,7 @@ export default function Signin() {
 
     
     const setTokenCookie = (token)=>{
-      Cookies.set('token', token, { secure: true, sameSite: 'Strict' });
+      Cookies.set('access_token', token, { secure: true, sameSite: 'None' });
     }
 
 
@@ -49,6 +49,7 @@ export default function Signin() {
         setLoading(false);
         setError(null);
         setTokenCookie(data.token);
+        console.log(data.token);
         dispatch(signinsuccess(data));
         setSuccessmessage('Signin successful! Redirecting to home...');
         
