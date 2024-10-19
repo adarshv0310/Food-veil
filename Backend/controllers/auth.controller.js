@@ -75,7 +75,7 @@ export const Signin = async(req, res, next) => {
         let token;
         let rest;
         try {
-            token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
             const { password: pass, ...userrest } = user._doc;
             rest = userrest;
 

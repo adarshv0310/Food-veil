@@ -4,7 +4,7 @@ import User from '../models/user.model.js';
 
 export const verifyToken = async(req, res, next) => {
     const token = req.cookies.access_token;
-    console.log('Token:', token);
+    // console.log('Token:', token);
     if (!token) return next(errorhandler(401, 'Unauthorized'));
 
     /*jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
@@ -18,12 +18,13 @@ export const verifyToken = async(req, res, next) => {
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
 
-    const user = await User.findById(decodedToken.id).select("role")
+    const user = await User.findById(decodedToken._id).select("-role")
 
     if (!user) {
         return next(errorhandler(401, 'Invalid Access Token'))
     }
 
     req.user = user;
+    req.userID = user._id;
     next();
 };

@@ -4,10 +4,22 @@ import bcrypt from 'bcrypt'
 
 
 export const updateUser = async(req, res, next) => {
-    if (req.user.id !== req.params.id) {
 
-        return next(errorhandler(500, 'Your account not found'));
+    const userID = req.userID.toString();
+    const id = req.params.id;
+    console.log(userID);
+    console.log("From Parmeters");
+    console.log(id);
+
+    console.log(`userID length: ${userID.length}`);
+    console.log(`id length: ${id.length}`);
+
+
+
+    if (userID.toLowerCase() !== id.toLowerCase()) {
+        return res.status(403).json({ "Message": "Access denied!" });
     }
+
 
     try {
         console.log('User ID from token:', req.user.id);
