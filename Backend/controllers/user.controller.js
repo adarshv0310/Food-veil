@@ -7,12 +7,8 @@ export const updateUser = async(req, res, next) => {
 
     const userID = req.userID.toString();
     const id = req.params.id;
-    console.log(userID);
-    console.log("From Parmeters");
-    console.log(id);
 
-    console.log(`userID length: ${userID.length}`);
-    console.log(`id length: ${id.length}`);
+
 
 
 
