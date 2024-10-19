@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signinsuccess } from '../redux/User/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'js-cookie'
 export default function Signin() {
   //const {loading , error ,currentUser} = useSelector((state)=>state.auth);
     const [loading , setLoading]=useState(false);
@@ -10,6 +11,12 @@ export default function Signin() {
     const [formdata , setFormdata]= useState({});
     const navigate=useNavigate();
     const dispatch=useDispatch();
+
+    
+    const setTokenCookie = (token)=>{
+      Cookies.set('token', token, { secure: true, sameSite: 'Strict' });
+    }
+
 
     const handlechange = (e)=>{
         setFormdata({
@@ -25,6 +32,7 @@ export default function Signin() {
 
         const res =  await fetch('http://localhost:8000/auth/signin' , {
             method:'POST',
+            credentials: 'include',
             headers:{
                 'Content-Type': 'application/json',
             },
@@ -40,7 +48,7 @@ export default function Signin() {
         }
         setLoading(false);
         setError(null);
-        localStorage.setItem('token', data.token);
+        setTokenCookie(data.token);
         dispatch(signinsuccess(data));
         setSuccessmessage('Signin successful! Redirecting to home...');
         

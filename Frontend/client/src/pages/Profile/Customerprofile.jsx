@@ -33,9 +33,10 @@ function Customerprofile() {
 
     const res= await fetch(`http://localhost:8000/user/update/${currentUser._id}` ,{
       method:'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+      
       },
       body: JSON.stringify(formdata),
     });
@@ -58,14 +59,20 @@ function Customerprofile() {
 
   const handledelete = async()=>{
     try{
-     dispatch(deleteUserStart);
+
+     dispatch(deleteUserStart());
      const res  =  await fetch(`http://localhost:8000/user/delete/${currentUser._id}`,{
       method:'DELETE',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer${token}`,
       },
      });
+     if (!currentUser || !token) {
+      dispatch(deleteUserFailure("User or token is not defined."));
+      return;
+  }
 
      const data = await res.json();
      if (data.success === false) {

@@ -39,7 +39,12 @@ mongoose.connect(URI, {
 
 // middlewares 
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());

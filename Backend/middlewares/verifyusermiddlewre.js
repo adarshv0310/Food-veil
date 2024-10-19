@@ -4,7 +4,10 @@ import User from '../models/user.model.js';
 
 export const verifyToken = async(req, res, next) => {
     const token = req.cookies.access_token;
-    // console.log('Token:', token);
+    /* const authHeader = req.headers['authorization'];
+     const token = authHeader && authHeader.split(' ')[1];
+     */
+    console.log('Token:', token);
     if (!token) return next(errorhandler(401, 'Unauthorized'));
 
     /*jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
