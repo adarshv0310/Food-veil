@@ -6,7 +6,9 @@ import { updateUserStart,
   deleteUserStart,
 deleteUserFailure,
 deleteUserSuccess,
-signOutUserStart} from '../redux/User/authSlice.js'
+signOutUserStart,
+signOutUserFailure,
+signOutUserSuccess} from '../redux/User/authSlice.js'
 import { useNavigate } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader.jsx';
 function UpdateProfile() {
@@ -96,7 +98,7 @@ function UpdateProfile() {
         try{
      dispatch(signOutUserStart());
 
-     const res =  await fetch(`http://localhost:8000/user/delete/${currentUser._id}`,
+     const res =  await fetch(`http://localhost:8000/auth/signout/${currentUser._id}`,
         {
             method:'POST',
             credentials:'include',
@@ -110,10 +112,17 @@ function UpdateProfile() {
      );
 
          const data= await res.json();
-         
+         if(data.success===false){
+            dispatch(signOutUserFailure(error.message))
+         }
+         dispatch(signOutUserSuccess(data));
+
+         setTimeout(()=>{
+            navigate('/signin');
+         } , 2000);
         }
         catch(error){
-
+   dispatch(signOutUserFailure(error.message));
         }
     }
     return (
