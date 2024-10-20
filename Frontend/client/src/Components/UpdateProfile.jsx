@@ -1,4 +1,4 @@
-import React, { useRef, useState }from 'react'
+import React, { useEffect, useRef, useState }from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserStart,
   updateUserSuccess,
@@ -8,7 +8,8 @@ deleteUserFailure,
 deleteUserSuccess,
 signOutUserStart,
 signOutUserFailure,
-signOutUserSuccess} from '../redux/User/authSlice.js'
+signOutUserSuccess,
+setError,setLoading} from '../redux/User/authSlice.js'
 import { useNavigate } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader.jsx';
 function UpdateProfile() {
@@ -125,6 +126,21 @@ function UpdateProfile() {
    dispatch(signOutUserFailure(error.message));
         }
     }
+
+
+    // To manage effecct of error 
+
+    useEffect(()=>{
+        if(error){
+            // settimeout return id of timer
+            const timer=setTimeout(()=>{
+                setError(null);
+            } , 3000);
+    
+            return ()=> clearTimeout(timer);
+          }
+    } , [error])
+
     return (
         <div className='container flex flex-col'>
           <ProfileHeader/>
