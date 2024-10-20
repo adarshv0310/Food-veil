@@ -98,7 +98,7 @@ export const Signin = async(req, res, next) => {
 
 
 
-export const signout = async(req, res, error, next) => {
+export const Signout = async(req, res, error, next) => {
     // clearing the token
     try {
         res.clearCookie('access_token');

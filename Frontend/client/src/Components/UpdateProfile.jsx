@@ -134,7 +134,7 @@ function UpdateProfile() {
         if(error){
             // settimeout return id of timer
             const timer=setTimeout(()=>{
-                setError(null);
+                dispatch(setError(null));
             } , 3000);
     
             return ()=> clearTimeout(timer);
@@ -211,7 +211,7 @@ function UpdateProfile() {
     </button>
     </form>
        
-        <p className='text-red-700 mt-5'>{error ? error : ''}</p>
+        {error && <p className='text-red-500 mt-5'>{error}</p>}
         <p className='text-green-700 mt-5'>
             {updateSuccess ? 'User is updated successfully!' : ''}
           </p>
