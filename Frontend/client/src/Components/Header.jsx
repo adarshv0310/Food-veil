@@ -20,9 +20,9 @@ function Header() {
       navigate('/adminp');
     } else if (currentUser?.role === 'customer') {
       navigate('/customerp');
-    } else if (currentUser?.role === 'resturant_owner') {
+    } else if (currentUser?.role === 'resturant') {
         navigate('/restaurantp');
-    } else if (currentUser?.role === 'delivery_person') {
+    } else if (currentUser?.role === 'delivery') {
         navigate('/deliveryp');
     } else {
         navigate('/'); // Fallback if role is not recognized
