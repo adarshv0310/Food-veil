@@ -1,11 +1,13 @@
 import React from 'react'
-
+import UpdateProfile from '../../Components/UpdateProfile'
 function ResturantProfile() {
   return (
     <div>
-      Resturant
+      <UpdateProfile/>
     </div>
   )
 }
 
 export default ResturantProfile
+
+
