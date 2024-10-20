@@ -20,7 +20,7 @@ function Header() {
       navigate('/adminp');
     } else if (currentUser?.role === 'customer') {
       navigate('/customerp');
-    } else if (currentUser?.role === 'restaurant_owner') {
+    } else if (currentUser?.role === 'resturant_owner') {
         navigate('/restaurantp');
     } else if (currentUser?.role === 'delivery_person') {
         navigate('/deliveryp');

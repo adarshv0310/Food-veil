@@ -20,7 +20,7 @@ function PrivateRoute({ element }) {
             return <Adminprofile />;
         case 'customer':
             return <Customerprofile />;
-        case 'restaurant_owner':
+        case 'resturant_owner':
             return <ResturantProfile />;
         case 'delivery_person':
             return <Deliveyperson />;
