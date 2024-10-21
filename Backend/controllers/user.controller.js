@@ -1,7 +1,7 @@
 import User from '../models/user.model.js'
 import { errorhandler } from '../utils/error.js'
 import bcrypt from 'bcrypt'
-
+import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 export const updateUser = async(req, res, next) => {
 
@@ -27,6 +27,14 @@ export const updateUser = async(req, res, next) => {
         if (req.body.password) {
             req.body.password = await bcrypt.hash(req.body.password, 10);
         }
+
+        // Handle file upload if an avatar is provided
+        /*if (req.file) {
+            console.log('Uploaded file:', req.file); // Log the uploaded file
+            const cloudinaryResponse = await uploadOnCloudinary(req.file.buffer);
+            req.body.avatar = cloudinaryResponse.url; // Save the URL from Cloudinary
+            console.log('Cloudinary response:', cloudinaryResponse); // Log response for debugging
+        } */
 
 
         // Updating  the user in the database

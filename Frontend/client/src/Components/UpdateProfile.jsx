@@ -20,7 +20,7 @@ function UpdateProfile() {
     const navigate=useNavigate();
     const [formdata , setFormdata] = useState({});
     const [updateSuccess, setUpdateSuccess] = useState(false);
-  
+    const [selectedfile , setSelectedfile]=useState(null);
     const handlechange=(e)=>{
       setFormdata(
         {
@@ -29,22 +29,26 @@ function UpdateProfile() {
         }
       );
     };
+
+   
   
   
     const handlesubmit = async(e)=>{
      e.preventDefault();
   
      try{
+        const formData = new FormData(); // Initialize FormData
+
+        // Append avatar if file is selected
+        
       dispatch(updateUserStart());
   
       const res= await fetch(`http://localhost:8000/user/update/${currentUser._id}` ,{
         method:'PUT',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        
-        },
-        body: JSON.stringify(formdata),
+       headers:{
+        'Content-Type': 'application/json',
+       },
       });
   
       const data=await res.json();
@@ -128,6 +132,10 @@ function UpdateProfile() {
     }
 
 
+
+
+
+
     // To manage effecct of error 
 
     useEffect(()=>{
@@ -140,6 +148,17 @@ function UpdateProfile() {
             return ()=> clearTimeout(timer);
           }
     } , [error])
+
+    useEffect(()=>{
+        if(updateSuccess){
+            // settimeout return id of timer
+            const timer=setTimeout(()=>{
+                setUpdateSuccess(false);
+            } , 3000);
+    
+            return ()=> clearTimeout(timer);
+          }
+    } , [updateSuccess])
 
     return (
         <div className='container flex flex-col'>
@@ -164,19 +183,7 @@ function UpdateProfile() {
           className='flex flex-col gap-4'
           onSubmit={handlesubmit}
           >
-           {/*<input 
-            type='file'
-            ref={fileRef}
-            accept='image/*'
-            hidden
-            />
-            <img
-            src={currentUser.avatar}
-            onClick={()=>fileRef.current.click()}
-            alt='profile'
-            
-            className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
-            />*/}
+          
               <input
               type='text'
            
@@ -225,3 +232,7 @@ function UpdateProfile() {
 }
 
 export default UpdateProfile
+
+
+
+
