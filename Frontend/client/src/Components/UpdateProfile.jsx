@@ -131,7 +131,19 @@ function UpdateProfile() {
         }
     }
 
-
+  const handleDashboard = ()=>{
+    if (currentUser?.role === 'admin') {
+      navigate('/admind');
+    } else if (currentUser?.role === 'customer') {
+      navigate('/customerd');
+    } else if (currentUser?.role === 'restaurant_owner') {
+        navigate('/restaurantd');
+    } else if (currentUser?.role === 'delivery') {
+        navigate('/deliveryd');
+    } else {
+        navigate('/'); // Fallback if role is not recognized
+    }
+  }
 
 
 
@@ -166,7 +178,9 @@ function UpdateProfile() {
           <div className=' flex flex-row'>
           <div className='   flex flex-col container shadow-md bg-white w-1/4 h-screen mt-10 '>
          
-         <button className='bg-slate-200  m-9 p-4 border rounded-xl font-bold text-lg'>Dashboard</button>
+         <button className='bg-slate-200  m-9 p-4 border rounded-xl font-bold text-lg'
+         onClick={handleDashboard}
+         >Dashboard</button>
          <button className='bg-slate-200  m-9  mt-1 p-4 border rounded-xl font-bold text-lg'
          onClick={handlesignout}
          >Signout</button>

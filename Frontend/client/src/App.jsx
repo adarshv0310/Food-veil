@@ -9,6 +9,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import Customerprofile from './pages/Profile/Customerprofile';
 import Deliveyperson from './pages/Profile/Deliveyperson';
 import ResturantProfile from './pages/Profile/ResturantProfile';
+import PrivateRouted from './Components/PrivateRouted';
 function App() {
   return (
     <div>
@@ -22,6 +23,11 @@ function App() {
       <Route path='/restaurantp' element={<PrivateRoute/>}/>
       <Route path='/deliveryp' element={<PrivateRoute/>}/>
       <Route path='/customerp' element={<PrivateRoute/>}/>
+
+      <Route path='/admind' element={<PrivateRouted/>}/>
+      <Route path='/restaurantd' element={<PrivateRouted/>}/>
+      <Route path='/deliveryd' element={<PrivateRouted/>}/>
+      <Route path='/customerd' element={<PrivateRouted/>}/>
       
      </Routes>
      </BrowserRouter>
