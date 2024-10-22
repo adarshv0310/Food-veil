@@ -6,6 +6,10 @@ const menuitemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    cateogry: {
+        type: String,
+        required: true,
+    },
     description: {
         type: String,
     },
@@ -17,6 +21,11 @@ const menuitemSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Restaurant',
         required: true,
+    },
+    imageUrl: {
+        type: String,
+        required: true,
+        default: "https://www.foodiesfeed.com/wp-content/uploads/2023/08/pork-meat-with-pak-choi-and-rice.jpg"
     },
 }, { timestamps: true });
 

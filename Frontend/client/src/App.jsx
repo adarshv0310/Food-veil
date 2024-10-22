@@ -10,6 +10,7 @@ import Customerprofile from './pages/Profile/Customerprofile';
 import Deliveyperson from './pages/Profile/Deliveyperson';
 import ResturantProfile from './pages/Profile/ResturantProfile';
 import PrivateRouted from './Components/PrivateRouted';
+import ResturantForm from './pages/ResturantForm';
 function App() {
   return (
     <div>
@@ -28,7 +29,7 @@ function App() {
       <Route path='/restaurantd' element={<PrivateRouted/>}/>
       <Route path='/deliveryd' element={<PrivateRouted/>}/>
       <Route path='/customerd' element={<PrivateRouted/>}/>
-      
+      <Route path='/returantform' element={<ResturantForm/>} />
      </Routes>
      </BrowserRouter>
     </div>
