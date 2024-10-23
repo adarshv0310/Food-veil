@@ -7,6 +7,7 @@ import authrouter from './routes/auth.route.js';
 import userrouter from './routes/user.route.js';
 import bodyParser from 'body-parser';
 import resturantrouter from './routes/resturo.route.js';
+import menuRouter from './routes/menu.route.js';
 dotenv.config();
 const app = express();
 
@@ -56,6 +57,7 @@ app.use(bodyParser.json());
 app.use('/auth', authrouter);
 app.use('/user', userrouter);
 app.use('/resturant', resturantrouter);
+app.use('/menu', menuRouter);
 
 
 
