@@ -46,7 +46,7 @@ function MenuForm() {
         <label className='font-medium mb-1'>Product category</label>
          <input
         type='text'
-        id="description"
+        id="category"
         className='border p-2 rounded-lg border-black'
         required
         />
@@ -55,7 +55,7 @@ function MenuForm() {
        <label className='font-medium mb-1'>Product price</label>
          <input
         type='number'
-        id="description"
+        id="price"
         className='border p-2 rounded-lg  border-black'
         required
         />
