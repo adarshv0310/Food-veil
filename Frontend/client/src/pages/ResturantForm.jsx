@@ -1,18 +1,49 @@
 import React, { useState } from 'react'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addResturant} from '../redux/Resturant/ResturantSlice';
+import { setError , setLoading } from '../redux/User/authSlice';
 function ResturantForm() {
-
+    const {currentUser,loading,error} = useSelector((state)=>state.auth);
     const [formdata , setFormdata]=useState({});
-
+    const dispatch = useDispatch();
     const handlechange = (e)=>{
         setFormdata({
             ...formdata , 
-            [e.trget.id]:e.target.value,
+            [e.target.id]:e.target.value,
         });
     }
     
-    const handlesubmit = (e)=>{
+    const handlesubmit = async(e)=>{
         e.preventDefault();
+        try{
+            setLoading(true);
+         const res=await fetch('http://localhost:8000/resturant/createresturant',{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({
+                ...formdata,
+                ownerId:currentUser.id,
+            }),
+         });
+
+
+        const data=await res.json();
+        if(data.success===false){
+            setLoading(false);
+            setError(data.message);
+            
+           return;
+        }
+        setLoading(false);
+        setError(null);
+        dispatch(addResturant(formdata));
+        }
+        catch(error){
+            setLoading(false);
+            setError(error.message);
+        }
     }
 
   return (
@@ -46,6 +77,8 @@ function ResturantForm() {
 
         <button  className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 w-32 mt-3'>Submit</button>
       </form>
+
+      {error && <p className='text-red-600 text-center'>{error}</p>}
     </div>
   )
 }

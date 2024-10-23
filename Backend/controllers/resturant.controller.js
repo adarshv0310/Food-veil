@@ -10,7 +10,9 @@ export const createRestaurant = async(req, res, next) => {
     try {
         const { name, location, ownerId } = req.body;
 
+        console.log(`Owner id ${ownerId}`);
         // fetching owner from the user model
+
         const owner = await User.findById(ownerId);
 
         if (!owner) {
@@ -45,6 +47,7 @@ export const createRestaurant = async(req, res, next) => {
         })
 
     } catch (error) {
+        console.log("Error : ", error);
         return next(errorhandler(500, 'Internal Server Error'));
     }
 }
