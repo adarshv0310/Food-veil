@@ -1,5 +1,6 @@
 import Resturant from "../models/resturant.model.js";
 import User from '../models/user.model.js'
+import mongoose from "mongoose";
 import {
     errorhandler
 } from '../utils/error.js'
@@ -9,6 +10,12 @@ export const createRestaurant = async(req, res, next) => {
 
     try {
         const { name, location, ownerId } = req.body;
+
+
+        if (!mongoose.Types.ObjectId.isValid(ownerId)) {
+            return next(errorhandler(400, 'Invalid owner ID format'));
+        }
+
 
         console.log(`Owner id ${ownerId}`);
         // fetching owner from the user model
