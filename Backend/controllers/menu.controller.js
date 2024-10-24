@@ -52,7 +52,23 @@ export const createMenuItem = async(req, res, next) => {
 export const getMenuItems = async() => {
     try {
         const menuItems = await MenuItem.find().populate('restaurant');
+        res.status(200).json({
+            success: true,
+            message: 'All menuitem get success',
+            menuItems,
+        });
     } catch (error) {
+        console.log(error);
+        next(errorhandler(500, 'Internal server error'));
+    }
+}
 
+
+export const getMenuItembyId = async() => {
+    try {
+
+    } catch (error) {
+        console.log(error);
+        next(errorhandler(500, 'Internal server error'));
     }
 }
