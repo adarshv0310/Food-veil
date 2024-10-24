@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 const resturantSchema = new mongoose.Schema({
-    _id: {
+    customid: {
         type: String, // Change this from ObjectId to String
         required: true,
     },

@@ -11,11 +11,12 @@ export const createMenuItem = async(req, res, next) => {
 
         const { name, description, price, resturantId, category, imageUrl } = req.body;
 
-        if (!mongoose.Types.ObjectId.isValid(resturantId)) {
-            return next(errorhandler(400, 'Invalid  resturant ID format'));
+        const restaurantIdRegex = /^REST-[A-Z0-9-]+-\d{13}$/;
+        if (!restaurantIdRegex.test(resturantId)) {
+            return next(errorhandler(400, 'Invalid restaurant ID format'));
         }
 
-        const resturant = await Resturant.findById(resturantId);
+        const resturant = await Resturant.findOne({ customid: resturantId });
 
         if (!resturant) {
             return next(errorhandler(404, 'Resturant not found'));
@@ -41,6 +42,7 @@ export const createMenuItem = async(req, res, next) => {
         })
 
     } catch (error) {
+        console.error("Error: ", error);
         return next(errorhandler(500, 'Internal server error'));
     }
 }

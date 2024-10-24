@@ -30,7 +30,7 @@ export const createRestaurant = async(req, res, next) => {
         const customId = `REST-${name.replace(/\s+/g, '-').toUpperCase()}-${Date.now()}`;
 
         const newRestaurant = new Resturant({
-            _id: customId,
+            customid: customId,
             name,
             owner: ownerId,
             location,
