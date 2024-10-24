@@ -85,5 +85,12 @@ export const getMenuItembyId = async() => {
 
 
 export const updatemenuItem = async() => {
+    try {
 
+        const id = req.params.id;
+
+    } catch (error) {
+        console.log(error);
+        return next(errorhandler(500, 'Internal server error'));
+    }
 }
