@@ -106,3 +106,14 @@ export const updatemenuItem = async() => {
         return next(errorhandler(500, 'Internal server error'));
     }
 }
+
+
+
+export const deletemenuItems = async() => {
+    try {
+
+    } catch (error) {
+        console.log(error);
+        return next(errorhandler(500, 'Internal server error'));
+    }
+}
