@@ -6,7 +6,7 @@ const menuitemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    cateogry: {
+    category: {
         type: String,
         required: true,
     },
@@ -18,8 +18,7 @@ const menuitemSchema = new mongoose.Schema({
         required: true,
     },
     restaurant: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurant',
+        type: String, // Change this to String to accommodate custom IDs
         required: true,
     },
     imageUrl: {

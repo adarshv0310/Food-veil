@@ -46,3 +46,13 @@ export const createMenuItem = async(req, res, next) => {
         return next(errorhandler(500, 'Internal server error'));
     }
 }
+
+
+// get all menu items 
+export const getMenuItems = async() => {
+    try {
+        const menuItems = await MenuItem.find().populate('restaurant');
+    } catch (error) {
+
+    }
+}
