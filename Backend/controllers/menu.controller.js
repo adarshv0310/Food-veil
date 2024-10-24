@@ -66,9 +66,24 @@ export const getMenuItems = async() => {
 
 export const getMenuItembyId = async() => {
     try {
-
+        const id = req.params.id;
+        const menuItem = await MenuItem.findById(id).populate('restaurant');
+        if (!menuItem) {
+            return next(errorhandler(404, 'Menu Item not found'));
+        }
+        res.status(200).json({
+            success: true,
+            message: 'Item found by id',
+            menuItem,
+        });
     } catch (error) {
         console.log(error);
         next(errorhandler(500, 'Internal server error'));
     }
+}
+
+
+
+export const updatemenuItem = async() => {
+
 }
