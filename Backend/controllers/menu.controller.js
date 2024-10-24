@@ -111,6 +111,7 @@ export const updatemenuItem = async() => {
 
 export const deletemenuItems = async() => {
     try {
+        const id = req.params.id;
 
     } catch (error) {
         console.log(error);
