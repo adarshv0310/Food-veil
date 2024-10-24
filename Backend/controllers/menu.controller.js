@@ -113,6 +113,17 @@ export const deletemenuItems = async() => {
     try {
         const id = req.params.id;
 
+        const menuItem = MenuItem.findByIdAndDelete(id);
+
+
+        if (!menuItem) {
+            next(errorhandler(404, 'Menu item not found'));
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Menu Item deleted successfully',
+        });
     } catch (error) {
         console.log(error);
         return next(errorhandler(500, 'Internal server error'));
