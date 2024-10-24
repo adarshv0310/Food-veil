@@ -88,6 +88,18 @@ export const updatemenuItem = async() => {
     try {
 
         const id = req.params.id;
+        const updatedmenuItem = await MenuItem.findByIdAndUpdate(id, { $set: req.body }, { new: true, runValidators: true });
+
+
+        if (!updatedmenuItem) {
+            return next(errorhandler(404, 'Menu item not found'));
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Menu Item updated successfully',
+            updatedmenuItem,
+        });
 
     } catch (error) {
         console.log(error);
